@@ -1,4 +1,4 @@
-# Teaching-HEIGVD-SRX-2020-Laboratoire-Firewall
+git # Teaching-HEIGVD-SRX-2020-Laboratoire-Firewall
 
 **ATTENTION : Commencez par créer un Fork de ce repo et travaillez sur votre fork.**
 
@@ -123,15 +123,24 @@ _Lors de la définition d'une zone, spécifier l'adresse du sous-réseau IP avec
 
 **LIVRABLE : Remplir le tableau**
 
-| Adresse IP source | Adresse IP destination | Type | Port src | Port dst | Action |
-| :---:             | :---:                  | :---:| :------: | :------: | :----: |
-|                   |                        |      |          |          |        |
-|                   |                        |      |          |          |        |
-|                   |                        |      |          |          |        |
-|                   |                        |      |          |          |        |
-|                   |                        |      |          |          |        |
-|                   |                        |      |          |          |        |
-|                   |                        |      |          |          |        |
+- Le réseau "LAN" &rarr; 192.168.100.0/24
+- Le réseau "DMZ" &rarr; 192.168.200.0/24
+- Le réseau "WAN" &rarr; *
+
+| #    | Adresse IP source | Adresse IP destination | Type | Port src | Port dst | Action |
+| ---- | :---------------: | :--------------------: | :--: | :------: | :------: | :----: |
+| 1    |        LAN        |          WAN           | UDP  |    *     |    53    | Accept |
+| 1    |        LAN        |          WAN           | TCP  |    *     |    53    | Accept |
+| 2    |        LAN        |          DMZ           | ICMP |    /     |    /     | Accept |
+| 2    |        LAN        |          WAN           | ICMP |    /     |    /     | Accept |
+| 2    |        DMZ        |          LAN           | ICMP |    /     |    /     | Accept |
+| 3    |        LAN        |           *            | TCP  |    *     |    80    | Accept |
+| 3    |        LAN        |           *            | TCP  |    *     |   8080   | Accept |
+| 4    |        LAN        |           *            | TCP  |    *     |   443    | Accept |
+| 5    |         *         |     192.168.200.3      | TCP  |    *     |    80    | Accept |
+| 6    |   192.168.100.3   |     192.168.200.3      | TCP  |    *     |    22    | Accept |
+| 7    |   192.168.100.3   |     192.168.100.2      | TCP  |    *     |    22    | Accept |
+| 8    |         *         |           *            | any  |    *     |    *     |  Drop  |
 
 ---
 
@@ -228,6 +237,8 @@ ping 192.168.200.3
 
 **LIVRABLE : capture d'écran de votre tentative de ping.**  
 
+![Tentative_ping](figures/Tentative_ping.png)
+
 ---
 
 En effet, la communication entre les clients dans le LAN et les serveurs dans la DMZ doit passer à travers le Firewall. Il faut donc définir le Firewall comme passerelle par défaut pour le client dans le LAN et le serveur dans la DMZ.
@@ -283,6 +294,8 @@ ping 192.168.100.3
 
 **LIVRABLE : capture d'écran de votre nouvelle tentative de ping.**
 
+![Tentative_ping](figures/Ping_reussi.png)
+
 ---
 
 La communication est maintenant possible entre les deux machines. Pourtant, si vous essayez de communiquer depuis le client ou le serveur vers l'Internet, ça ne devrait pas encore fonctionner sans une manipulation supplémentaire au niveau du firewall. Vous pouvez le vérifier avec un ping depuis le client ou le serveur vers une adresse Internet. 
@@ -296,6 +309,8 @@ ping 8.8.8.8
 ---
 
 **LIVRABLE : capture d'écran de votre ping vers l'Internet.**
+
+![Tentative_ping_internet](figures/Tentative_ping_internet.png)
 
 ---
 
@@ -403,7 +418,7 @@ LIVRABLE : Commandes iptables
 
 ```bash
 ping 8.8.8.8
-``` 	            
+```
 Faire une capture du ping.
 
 ---
@@ -468,7 +483,6 @@ LIVRABLE : Commandes iptables
   <li>Tester en réitérant la commande ping sur le serveur de test (Google ou autre) : 
   </li>                                  
 </ol>
-
 ---
 
 **LIVRABLE : capture d'écran de votre ping.**
@@ -479,7 +493,6 @@ LIVRABLE : Commandes iptables
   <li>Remarques (sur le message du premier ping)? 
   </li>                                  
 </ol>
-
 ---
 **Réponse**
 
@@ -523,7 +536,6 @@ LIVRABLE : Commandes iptables
   <li>Tester l’accès à ce serveur depuis le LAN utilisant utilisant wget (ne pas oublier les captures d'écran). 
   </li>                                  
 </ol>
-
 ---
 
 **LIVRABLE : capture d'écran.**
@@ -564,7 +576,6 @@ ssh root@192.168.200.3 (password : celui que vous avez configuré)
   <li>Expliquer l'utilité de **ssh** sur un serveur. 
   </li>                                  
 </ol>
-
 ---
 **Réponse**
 
@@ -593,7 +604,6 @@ A présent, vous devriez avoir le matériel nécessaire afin de reproduire la ta
   <li>Insérer la capture d’écran avec toutes vos règles iptables
   </li>                                  
 </ol>
-
 ---
 
 **LIVRABLE : capture d'écran avec toutes vos règles.**
