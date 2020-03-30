@@ -605,18 +605,20 @@ ssh root@192.168.200.3 (password : celui que vous avez configuré)
 
 **LIVRABLE : Votre réponse ici...**
 
+Le protocole SSH permet de prendre le contrôle d'une machine distante en ligne de commande. Une fois connecté, l'utilisateur bénéficie des même fonctionnalités que s'il était physiquement devant la machine. La communication est authentifiée et chiffrée pour assurer la sécurité.
+
 ---
 
 <ol type="a" start="10">
   <li>En général, à quoi faut-il particulièrement faire attention lors de l'écriture des règles du pare-feu pour ce type de connexion ? 
   </li>                                  
 </ol>
-
-
 ---
 **Réponse**
 
 **LIVRABLE : Votre réponse ici...**
+
+SSH est un point sensible d'un serveur car il permet d'obtenir un contrôle total sur ce dernier. Ainsi, il est important de limité au maximum le nombre de machines pouvant accéder à ce port sur les serveurs critiques.
 
 ---
 
