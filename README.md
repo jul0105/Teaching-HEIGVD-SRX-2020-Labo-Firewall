@@ -1,4 +1,4 @@
-git # Teaching-HEIGVD-SRX-2020-Laboratoire-Firewall
+# Teaching-HEIGVD-SRX-2020-Laboratoire-Firewall
 
 **ATTENTION : Commencez par créer un Fork de ce repo et travaillez sur votre fork.**
 
@@ -482,6 +482,8 @@ ping www.google.com
 
 **LIVRABLE : capture d'écran de votre ping.**
 
+![DNS_ping_failure](figures/DNS_ping_failure.png)
+
 ---
 
 * Créer et appliquer la règle adéquate pour que la **condition 1 du cahier des charges** soit respectée.
@@ -517,6 +519,8 @@ iptables -A FORWARD -p udp --dport 53 -s 192.168.100.0/24 -o eth0 -j ACCEPT
 **Réponse**
 
 **LIVRABLE : Votre réponse ici...**
+
+Ce n'est pas le ping en lui même qui a échouer mais c'est la résoultion du nom de domaine. La commande ping ne peut pas être exécuté si elle ne peut pas récupérer l'adresse IP associé au nom de domain.
 
 ---
 
