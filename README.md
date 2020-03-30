@@ -1,4 +1,4 @@
-git # Teaching-HEIGVD-SRX-2020-Laboratoire-Firewall
+# Teaching-HEIGVD-SRX-2020-Laboratoire-Firewall
 
 **ATTENTION : Commencez par créer un Fork de ce repo et travaillez sur votre fork.**
 
@@ -485,6 +485,8 @@ ping www.google.com
 
 **LIVRABLE : capture d'écran de votre ping.**
 
+![DNS_ping_failure](figures/DNS_ping_failure.png)
+
 ---
 
 * Créer et appliquer la règle adéquate pour que la **condition 1 du cahier des charges** soit respectée.
@@ -520,6 +522,8 @@ iptables -A FORWARD -p udp --dport 53 -s 192.168.100.0/24 -o eth0 -j ACCEPT
 **Réponse**
 
 **LIVRABLE : Votre réponse ici...**
+
+Ce n'est pas le ping en lui même qui a échouer mais c'est la résoultion du nom de domaine. La commande ping ne peut pas être exécuté si elle ne peut pas récupérer l'adresse IP associé au nom de domain.
 
 ---
 
@@ -615,18 +619,20 @@ ssh root@192.168.200.3 (password : celui que vous avez configuré)
 
 **LIVRABLE : Votre réponse ici...**
 
+Le protocole SSH permet de prendre le contrôle d'une machine distante en ligne de commande. Une fois connecté, l'utilisateur bénéficie des même fonctionnalités que s'il était physiquement devant la machine. La communication est authentifiée et chiffrée pour assurer la sécurité.
+
 ---
 
 <ol type="a" start="10">
   <li>En général, à quoi faut-il particulièrement faire attention lors de l'écriture des règles du pare-feu pour ce type de connexion ? 
   </li>                                  
 </ol>
-
-
 ---
 **Réponse**
 
 **LIVRABLE : Votre réponse ici...**
+
+SSH est un point sensible d'un serveur car il permet d'obtenir un contrôle total sur ce dernier. Ainsi, il est important de limité au maximum le nombre de machines pouvant accéder à ce port sur les serveurs critiques.
 
 ---
 
