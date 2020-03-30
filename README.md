@@ -167,7 +167,7 @@ Vous avez probablement déjà installé Git pour d’autres cours ou projets. Si
 
 ## Ajout des conteneurs et configuration du réseau
 
-### Le repertoire [scripts](https://github.com/arubinst/Teaching-HEIGVD-SRX-2020-Labo-Firewall/tree/master/scripts) contient des scripts qui automatisent des parties de ce travail. Il es cependant conseillé de la faire manuellement pour mieux comprendre la procédure.
+### Le répertoire [scripts](https://github.com/arubinst/Teaching-HEIGVD-SRX-2020-Labo-Firewall/tree/master/scripts) contient des scripts qui automatisent des parties de ce travail. Il es cependant conseillé de la faire manuellement pour mieux comprendre la procédure.
 
 Nous allons commencer par créer les réseaux **LAN** et **DMZ** dans le système réseau de Docker. Il suffit de tapper les commandes suivantes :
 
@@ -409,8 +409,8 @@ iptables -P INPUT DROP
 iptables -P OUTPUT DROP
 iptables -P FORWARD DROP
 
-iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
-iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -m conntrack --ctstate INVALID -j DROP
 
 
 iptables -A FORWARD -p icmp -s 192.168.100.0/24 -d 192.168.200.0/24 --icmp-type 8 -j ACCEPT
@@ -491,7 +491,8 @@ Commandes iptables :
 ---
 
 ```bash
-LIVRABLE : Commandes iptables
+iptables -A FORWARD -p tcp --dport 53 -s 192.168.100.0/24 -o eth0 -j ACCEPT
+iptables -A FORWARD -p udp --dport 53 -s 192.168.100.0/24 -o eth0 -j ACCEPT
 ```
 
 ---
@@ -503,6 +504,8 @@ LIVRABLE : Commandes iptables
 ---
 
 **LIVRABLE : capture d'écran de votre ping.**
+
+![](figures/client_ping_google.png)
 
 ---
 
