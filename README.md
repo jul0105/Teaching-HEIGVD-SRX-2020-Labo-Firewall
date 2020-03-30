@@ -502,6 +502,7 @@ iptables -A FORWARD -p udp --dport 53 -s 192.168.100.0/24 -o eth0 -j ACCEPT
   <li>Tester en réitérant la commande ping sur le serveur de test (Google ou autre) : 
   </li>                                  
 </ol>
+
 ---
 
 ![](figures/client_ping_google.png)
@@ -512,6 +513,7 @@ iptables -A FORWARD -p udp --dport 53 -s 192.168.100.0/24 -o eth0 -j ACCEPT
   <li>Remarques (sur le message du premier ping)? 
   </li>                                  
 </ol>
+
 ---
 
 **Réponse**
@@ -560,6 +562,7 @@ iptables -A FORWARD -p tcp --dport 80 -d 192.168.200.3 -s 192.168.100.0/24 -j AC
   <li>Tester l’accès à ce serveur depuis le LAN utilisant utilisant wget (ne pas oublier les captures d'écran). 
   </li>                                  
 </ol>
+
 ---
 
 ![](figures/iptables_http.png)
@@ -609,6 +612,7 @@ ssh root@192.168.200.3 (password : celui que vous avez configuré)
   <li>Expliquer l'utilité de <b>ssh</b> sur un serveur. 
   </li>                                  
 </ol>
+
 ---
 
 **Réponse**
@@ -621,6 +625,7 @@ Le protocole SSH permet de prendre le contrôle d'une machine distante en ligne 
   <li>En général, à quoi faut-il particulièrement faire attention lors de l'écriture des règles du pare-feu pour ce type de connexion ? 
   </li>                                  
 </ol>
+
 ---
 
 **Réponse**
@@ -637,6 +642,7 @@ A présent, vous devriez avoir le matériel nécessaire afin de reproduire la ta
   <li>Insérer la capture d’écran avec toutes vos règles iptables
   </li>                                  
 </ol>
+
 ---
 
 ![](figures/iptables.png)
