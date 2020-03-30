@@ -423,6 +423,7 @@ iptables -A FORWARD -p icmp -s 192.168.100.0/24 -d 192.168.200.0/24 --icmp-type 
 iptables -A FORWARD -p icmp -s 192.168.100.0/24 -o eth0 --icmp-type 8 -j ACCEPT
 iptables -A FORWARD -p icmp -d 192.168.100.0/24 -i eth0 --icmp-type 0 -j ACCEPT
 ```
+
 ---
 
 ### Questions
@@ -438,6 +439,7 @@ ping 8.8.8.8
 Faire une capture du ping.
 
 ---
+
 ![](figures/client_ping_wan.png)
 
 ---
@@ -511,6 +513,7 @@ iptables -A FORWARD -p udp --dport 53 -s 192.168.100.0/24 -o eth0 -j ACCEPT
   </li>                                  
 </ol>
 ---
+
 **Réponse**
 
 Ce n'est pas le ping en lui même qui a échouer mais c'est la résoultion du nom de domaine. La commande ping ne peut pas être exécuté si elle ne peut pas récupérer l'adresse IP associé au nom de domain.
@@ -550,6 +553,7 @@ Commandes iptables :
 iptables -A FORWARD -p tcp --dport 80 -d 192.168.200.3 -i eth0 -j ACCEPT
 iptables -A FORWARD -p tcp --dport 80 -d 192.168.200.3 -s 192.168.100.0/24 -j ACCEPT
 ```
+
 ---
 
 <ol type="a" start="7">
@@ -605,8 +609,8 @@ ssh root@192.168.200.3 (password : celui que vous avez configuré)
   <li>Expliquer l'utilité de <b>ssh</b> sur un serveur. 
   </li>                                  
 </ol>
-
 ---
+
 **Réponse**
 
 Le protocole SSH permet de prendre le contrôle d'une machine distante en ligne de commande. Une fois connecté, l'utilisateur bénéficie des même fonctionnalités que s'il était physiquement devant la machine. La communication est authentifiée et chiffrée pour assurer la sécurité.
@@ -618,6 +622,7 @@ Le protocole SSH permet de prendre le contrôle d'une machine distante en ligne 
   </li>                                  
 </ol>
 ---
+
 **Réponse**
 
 SSH est un point sensible d'un serveur car il permet d'obtenir un contrôle total sur ce dernier. Ainsi, il est important de limité au maximum le nombre de machines pouvant accéder à ce port sur les serveurs critiques.
