@@ -409,6 +409,9 @@ iptables -P INPUT DROP
 iptables -P OUTPUT DROP
 iptables -P FORWARD DROP
 
+iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+
 iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 iptables -A FORWARD -m conntrack --ctstate INVALID -j DROP
 
@@ -540,7 +543,9 @@ Commandes iptables :
 ---
 
 ```bash
-LIVRABLE : Commandes iptables
+iptables -A FORWARD -p tcp --dport 80 -s 192.168.100.0/24 -o eth0 -j ACCEPT
+iptables -A FORWARD -p tcp --dport 8080 -s 192.168.100.0/24 -o eth0 -j ACCEPT
+iptables -A FORWARD -p tcp --dport 443 -s 192.168.100.0/24 -o eth0 -j ACCEPT
 ```
 
 ---
@@ -564,6 +569,8 @@ LIVRABLE : Commandes iptables
 
 **LIVRABLE : capture d'écran.**
 
+![](figures/iptables_http.png)
+
 ---
 
 
@@ -579,7 +586,10 @@ Commandes iptables :
 ---
 
 ```bash
-LIVRABLE : Commandes iptables
+iptables -A FORWARD -p tcp --dport 22 -s 192.168.100.3 -d 192.168.200.3 -j ACCEPT
+
+iptables -A INPUT   -p tcp --dport 22 -s 192.168.100.3 -d 192.168.100.2 -j ACCEPT
+iptables -A OUTPUT  -p tcp --sport 22 -s 192.168.100.2 -d 192.168.100.3 -j ACCEPT
 ```
 
 ---
@@ -593,6 +603,10 @@ ssh root@192.168.200.3 (password : celui que vous avez configuré)
 ---
 
 **LIVRABLE : capture d'écran de votre connexion ssh.**
+
+![](figures/iptables_ssh.png)
+
+![](figures/iptables_ssh_2.png)
 
 ---
 
