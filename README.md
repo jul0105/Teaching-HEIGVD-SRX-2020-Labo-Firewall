@@ -405,7 +405,22 @@ Commandes iptables :
 ---
 
 ```bash
-LIVRABLE : Commandes iptables
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+
+iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+
+
+iptables -A FORWARD -p icmp -s 192.168.100.0/24 -d 192.168.200.0/24 --icmp-type 8 -j ACCEPT
+iptables -A FORWARD -p icmp -s 192.168.200.0/24 -d 192.168.100.0/24 --icmp-type 0 -j ACCEPT
+
+iptables -A FORWARD -p icmp -s 192.168.200.0/24 -d 192.168.100.0/24 --icmp-type 8 -j ACCEPT
+iptables -A FORWARD -p icmp -s 192.168.100.0/24 -d 192.168.200.0/24 --icmp-type 0 -j ACCEPT
+
+iptables -A FORWARD -p icmp -s 192.168.100.0/24 -o eth0 --icmp-type 8 -j ACCEPT
+iptables -A FORWARD -p icmp -d 192.168.100.0/24 -i eth0 --icmp-type 0 -j ACCEPT
 ```
 ---
 
@@ -424,6 +439,8 @@ Faire une capture du ping.
 ---
 **LIVRABLE : capture d'écran de votre ping vers l'Internet.**
 
+![](figures/client_ping_wan.png)
+
 ---
 
 <ol type="a" start="3">
@@ -432,20 +449,20 @@ Faire une capture du ping.
 </ol>
 
 
-| De Client\_in\_LAN à | OK/KO | Commentaires et explications |
-| :---                 | :---: | :---                         |
-| Interface DMZ du FW  |       |                              |
-| Interface LAN du FW  |       |                              |
-| Client LAN           |       |                              |
-| Serveur WAN          |       |                              |
+| De Client\_in\_LAN à | OK/KO | Commentaires et explications                           |
+| :------------------- | :---: | :----------------------------------------------------- |
+| Interface DMZ du FW  |  KO   | INPUT et OUTPUT du firewall sont en DROP par défaut    |
+| Interface LAN du FW  |  KO   | INPUT et OUTPUT du firewall sont en DROP par défaut    |
+| Client LAN           |  OK   | C'est sur le même réseau, ne passe pas par le firewall |
+| Serveur WAN          |  OK   | Grâce à une règle ajoutée précédemment                 |
 
 
-| De Server\_in\_DMZ à | OK/KO | Commentaires et explications |
-| :---                 | :---: | :---                         |
-| Interface DMZ du FW  |       |                              |
-| Interface LAN du FW  |       |                              |
-| Serveur DMZ          |       |                              |
-| Serveur WAN          |       |                              |
+| De Server\_in\_DMZ à | OK/KO | Commentaires et explications                           |
+| :------------------- | :---: | :----------------------------------------------------- |
+| Interface DMZ du FW  |  KO   | INPUT et OUTPUT du firewall sont en DROP par défaut    |
+| Interface LAN du FW  |  KO   | INPUT et OUTPUT du firewall sont en DROP par défaut    |
+| Serveur DMZ          |  OK   | C'est sur le même réseau, ne passe pas par le firewall |
+| Serveur WAN          |  KO   | Pas de règle ici contrairement au LAN                  |
 
 
 ## Règles pour le protocole DNS
