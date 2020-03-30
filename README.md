@@ -546,6 +546,9 @@ Commandes iptables :
 iptables -A FORWARD -p tcp --dport 80 -s 192.168.100.0/24 -o eth0 -j ACCEPT
 iptables -A FORWARD -p tcp --dport 8080 -s 192.168.100.0/24 -o eth0 -j ACCEPT
 iptables -A FORWARD -p tcp --dport 443 -s 192.168.100.0/24 -o eth0 -j ACCEPT
+
+iptables -A FORWARD -p tcp --dport 80 -d 192.168.200.3 -i eth0 -j ACCEPT
+iptables -A FORWARD -p tcp --dport 80 -d 192.168.200.3 -s 192.168.100.0/24 -j ACCEPT
 ```
 
 ---
@@ -570,6 +573,8 @@ LIVRABLE : Commandes iptables
 **LIVRABLE : capture d'écran.**
 
 ![](figures/iptables_http.png)
+
+![](figures/iptables_http_dmz.png)
 
 ---
 
