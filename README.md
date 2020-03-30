@@ -121,8 +121,6 @@ _Lors de la définition d'une zone, spécifier l'adresse du sous-réseau IP avec
 
 ---
 
-**LIVRABLE : Remplir le tableau**
-
 - Le réseau "LAN" &rarr; 192.168.100.0/24
 - Le réseau "DMZ" &rarr; 192.168.200.0/24
 - Le réseau "WAN" &rarr; *
@@ -235,7 +233,7 @@ ping 192.168.200.3
 ```
 ---
 
-**LIVRABLE : capture d'écran de votre tentative de ping.**  
+**Capture d'écran de la tentative de ping.**  
 
 ![Tentative_ping](figures/Tentative_ping.png)
 
@@ -292,7 +290,7 @@ ping 192.168.100.3
 
 ---
 
-**LIVRABLE : capture d'écran de votre nouvelle tentative de ping.**
+**Capture d'écran de la nouvelle tentative de ping.**
 
 ![Tentative_ping](figures/Ping_reussi.png)
 
@@ -308,7 +306,7 @@ ping 8.8.8.8
 
 ---
 
-**LIVRABLE : capture d'écran de votre ping vers l'Internet.**
+**Capture d'écran du ping vers l'Internet.**
 
 ![Tentative_ping_internet](figures/Tentative_ping_internet.png)
 
@@ -440,8 +438,6 @@ ping 8.8.8.8
 Faire une capture du ping.
 
 ---
-**LIVRABLE : capture d'écran de votre ping vers l'Internet.**
-
 ![](figures/client_ping_wan.png)
 
 ---
@@ -483,8 +479,6 @@ ping www.google.com
 
 ---
 
-**LIVRABLE : capture d'écran de votre ping.**
-
 ![DNS_ping_failure](figures/DNS_ping_failure.png)
 
 ---
@@ -508,8 +502,6 @@ iptables -A FORWARD -p udp --dport 53 -s 192.168.100.0/24 -o eth0 -j ACCEPT
 </ol>
 ---
 
-**LIVRABLE : capture d'écran de votre ping.**
-
 ![](figures/client_ping_google.png)
 
 ---
@@ -520,8 +512,6 @@ iptables -A FORWARD -p udp --dport 53 -s 192.168.100.0/24 -o eth0 -j ACCEPT
 </ol>
 ---
 **Réponse**
-
-**LIVRABLE : Votre réponse ici...**
 
 Ce n'est pas le ping en lui même qui a échouer mais c'est la résoultion du nom de domaine. La commande ping ne peut pas être exécuté si elle ne peut pas récupérer l'adresse IP associé au nom de domain.
 
@@ -546,9 +536,6 @@ Commandes iptables :
 iptables -A FORWARD -p tcp --dport 80 -s 192.168.100.0/24 -o eth0 -j ACCEPT
 iptables -A FORWARD -p tcp --dport 8080 -s 192.168.100.0/24 -o eth0 -j ACCEPT
 iptables -A FORWARD -p tcp --dport 443 -s 192.168.100.0/24 -o eth0 -j ACCEPT
-
-iptables -A FORWARD -p tcp --dport 80 -d 192.168.200.3 -i eth0 -j ACCEPT
-iptables -A FORWARD -p tcp --dport 80 -d 192.168.200.3 -s 192.168.100.0/24 -j ACCEPT
 ```
 
 ---
@@ -560,7 +547,8 @@ Commandes iptables :
 ---
 
 ```bash
-LIVRABLE : Commandes iptables
+iptables -A FORWARD -p tcp --dport 80 -d 192.168.200.3 -i eth0 -j ACCEPT
+iptables -A FORWARD -p tcp --dport 80 -d 192.168.200.3 -s 192.168.100.0/24 -j ACCEPT
 ```
 ---
 
@@ -570,21 +558,19 @@ LIVRABLE : Commandes iptables
 </ol>
 ---
 
-**LIVRABLE : capture d'écran.**
-
 ![](figures/iptables_http.png)
 
 ![](figures/iptables_http_dmz.png)
 
 ---
 
-
 ## Règles pour le protocole ssh
 
 <ol type="a" start="8">
-  <li>Créer et appliquer la règle adéquate pour que les **conditions 6 et 7 du cahier des charges** soient respectées. 
+  <li>Créer et appliquer la règle adéquate pour que les <b>conditions 6 et 7 du cahier des charges</b> soient respectées. 
   </li>                                  
 </ol>
+
 
 Commandes iptables :
 
@@ -607,7 +593,7 @@ ssh root@192.168.200.3 (password : celui que vous avez configuré)
 
 ---
 
-**LIVRABLE : capture d'écran de votre connexion ssh.**
+**Capture d'écran des connexions ssh.**
 
 ![](figures/iptables_ssh.png)
 
@@ -616,13 +602,12 @@ ssh root@192.168.200.3 (password : celui que vous avez configuré)
 ---
 
 <ol type="a" start="9">
-  <li>Expliquer l'utilité de **ssh** sur un serveur. 
+  <li>Expliquer l'utilité de <b>ssh</b> sur un serveur. 
   </li>                                  
 </ol>
+
 ---
 **Réponse**
-
-**LIVRABLE : Votre réponse ici...**
 
 Le protocole SSH permet de prendre le contrôle d'une machine distante en ligne de commande. Une fois connecté, l'utilisateur bénéficie des même fonctionnalités que s'il était physiquement devant la machine. La communication est authentifiée et chiffrée pour assurer la sécurité.
 
@@ -634,8 +619,6 @@ Le protocole SSH permet de prendre le contrôle d'une machine distante en ligne 
 </ol>
 ---
 **Réponse**
-
-**LIVRABLE : Votre réponse ici...**
 
 SSH est un point sensible d'un serveur car il permet d'obtenir un contrôle total sur ce dernier. Ainsi, il est important de limité au maximum le nombre de machines pouvant accéder à ce port sur les serveurs critiques.
 
@@ -649,10 +632,6 @@ A présent, vous devriez avoir le matériel nécessaire afin de reproduire la ta
   <li>Insérer la capture d’écran avec toutes vos règles iptables
   </li>                                  
 </ol>
----
-
-**LIVRABLE : capture d'écran avec toutes vos règles.**
-
 ---
 
 ![](figures/iptables.png)
